@@ -17,6 +17,11 @@ import {
   Database, Eye, Laptop, Smartphone, Globe, Github, Info, AlertTriangle, Menu, X, ArrowUpRight
 } from 'lucide-react';
 
+import { signInWithPopup, signOut } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, provider, db } from "./firebase";
+import { User } from "firebase/auth";
+
 export default function App() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -28,6 +33,8 @@ export default function App() {
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [activeSeconds, setActiveSeconds] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // Initialize and seed states
   useEffect(() => {
@@ -127,6 +134,69 @@ export default function App() {
     setMobileMenuOpen(false);
   };
 
+const ADMIN_EMAILS = ["fikrieza69@gmail.com"];
+
+const handleLogin = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const firebaseUser = result.user;
+
+    if (!firebaseUser.email) {
+      alert("Email tidak ditemukan");
+      await signOut(auth);
+      return;
+    }
+
+    console.log("LOGIN EMAIL:", firebaseUser.email);
+
+    const userRef = doc(db, "users", firebaseUser.uid);
+    const snap = await getDoc(userRef);
+
+    // tentukan role berdasarkan whitelist
+    const isAdminEmail = ADMIN_EMAILS.includes(firebaseUser.email);
+
+    // jika user belum ada → buat data user
+    if (!snap.exists()) {
+      await setDoc(userRef, {
+        email: firebaseUser.email,
+        role: isAdminEmail ? "admin" : "user",
+        createdAt: new Date().toISOString()
+      });
+    }
+
+    // ambil ulang data terbaru
+    const userData = (await getDoc(userRef)).data();
+
+    if (!userData) {
+      alert("User data tidak ditemukan");
+      await signOut(auth);
+      return;
+    }
+
+    // validasi admin dari Firestore (bukan frontend saja)
+    if (userData.role !== "admin") {
+      alert("Akses ditolak (bukan admin)");
+      await signOut(auth);
+      return;
+    }
+
+    setUser(firebaseUser);
+    setIsAdmin(true);
+    setShowAdminPanel(true);
+
+  } catch (err) {
+    console.error("Login error:", err);
+  }
+};
+
+const handleLogout = async () => {
+  await signOut(auth);
+  setUser(null);
+  setIsAdmin(false);
+  setShowAdminPanel(false);
+  recordEvent("visit", "Admin logout");
+};
+
   return (
     <div className="min-h-screen bg-[#090a0f] text-zinc-100 flex flex-col font-sans antialiased relative selection:bg-emerald-500 selection:text-black">
       
@@ -186,14 +256,20 @@ export default function App() {
 
           {/* Action Badge & Mobile controls */}
           <div className="flex items-center gap-3">
-            <button
-              id="header-btn-cms-open"
-              onClick={() => { setShowAdminPanel(true); recordEvent('visit', 'Membuka Panel Admin'); }}
-              className="hidden lg:flex items-center gap-2 rounded-lg bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500 hover:bg-zinc-900 px-3.5 py-1.5 text-[11px] font-mono font-medium text-emerald-400 tracking-tight transition-all cursor-pointer shadow-sm shadow-black"
-            >
-              <Database className="h-3.5 w-3.5" />
-              Panel Admin
-            </button>
+            {user && (
+    <button onClick={handleLogout} className="text-xs text-red-400">
+      Logout
+    </button>
+  )}
+
+  <button
+    id="header-btn-cms-open"
+    onClick={handleLogin}
+    className="hidden lg:flex ..."
+  >
+    <Database className="h-3.5 w-3.5" />
+    Panel Admin
+  </button>
 
             {/* Mobile Hamburger Burger menu */}
             <button
@@ -368,7 +444,6 @@ export default function App() {
               <div className="flex flex-col items-center justify-center border border-dashed border-zinc-900 rounded-2xl py-20 text-center bg-zinc-950/20">
                 <AlertTriangle className="h-10 w-10 text-zinc-700 mb-3" />
                 <p className="text-sm text-zinc-400 font-medium">Tidak ada proyek dalam kategori {categoryFilter}.</p>
-                <p className="text-xs text-zinc-655 mt-1">Anda dapat menambahkannya melalui Panel Admin.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -408,8 +483,8 @@ export default function App() {
                   {/* Small stat rows */}
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-900">
                     <div>
-                      <span className="text-[10px] uppercase font-mono text-zinc-500 block">Mahasiswa Sistem Informasi</span>
-                      <span className="text-2xl font-bold font-mono text-emerald-400">Universitas Pamulang</span>
+                      <span className="text-[10px] uppercase font-mono text-zinc-500 block">Semester Aktif</span>
+                      <span className="text-2xl font-bold font-mono text-emerald-400">4</span>
                     </div>
                     <div>
                       <span className="text-[10px] uppercase font-mono text-zinc-500 block">Proyek Pembelajaran</span>
@@ -554,18 +629,18 @@ export default function App() {
 
       {/* MODAL PANEL ADMIN */}
       <AnimatePresence>
-        {showAdminPanel && (
-          <AdminPanel
-            projects={projects}
-            messages={messages}
-            events={analyticsEvents}
-            activeSeconds={activeSeconds}
-            onUpdateProjects={handleUpdateProjectsFromCMS}
-            onUpdateMessages={handleUpdateMessagesFromCMS}
-            onResetProjects={handleResetProjectsToDefault}
-            onClose={() => setShowAdminPanel(false)}
-          />
-        )}
+        {showAdminPanel && user && isAdmin && (
+  <AdminPanel
+    projects={projects}
+    messages={messages}
+    events={analyticsEvents}
+    activeSeconds={activeSeconds}
+    onUpdateProjects={handleUpdateProjectsFromCMS}
+    onUpdateMessages={handleUpdateMessagesFromCMS}
+    onResetProjects={handleResetProjectsToDefault}
+    onClose={() => setShowAdminPanel(false)}
+  />
+)}
       </AnimatePresence>
 
     </div>
