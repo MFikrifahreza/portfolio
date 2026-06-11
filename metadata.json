@@ -1,0 +1,6 @@
+{
+  "name": "CDM Portfolio & CMS",
+  "description": "Minimalist interactive portfolio for CDM featuring smooth animations, a rich-text project detail viewer, real-time analytics, and a self-management content system (CMS).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
