@@ -18,15 +18,21 @@ export default function ProjectCard({ project, onOpen, index }: ProjectCardProps
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -6 }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 transition-all duration-300 hover:border-zinc-700/80 hover:bg-zinc-900/90 hover:shadow-2xl hover:shadow-black/60 focus-within:ring-2 focus-within:ring-emerald-500/50"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl
+border border-white/10
+bg-white/5 backdrop-blur-xl
+shadow-lg shadow-black/30
+p-4 transition-all duration-300
+hover:bg-white/10 hover:border-white/20 hover:shadow-xl hover:shadow-black/50"
     >
       {/* Visual Header / Thumbnail */}
-      <div className="relative mb-5 overflow-hidden rounded-xl aspect-16/10 bg-zinc-950">
+      <div className="relative mb-5 overflow-hidden rounded-xl aspect-16/10
+bg-white/5 backdrop-blur-md border border-white/10">
         <img
           src={project.coverUrl}
           alt={project.title}
           referrerPolicy="no-referrer"
-          className="h-full w-full object-cover object-center grayscale opacity-80 transition-transform duration-700 ease-[0.16, 1, 0.3, 1] group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"
+          className="h-full w-full object-cover object-center grayscale opacity-80 transition-transform duration-700 ease-[0.16, 1, 0.3, 1] group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 "
         />
         
         {/* Category Badge overlay */}

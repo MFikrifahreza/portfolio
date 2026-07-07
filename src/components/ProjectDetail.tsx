@@ -183,7 +183,7 @@ export default function ProjectDetail({ project, onClose }: ProjectDetailProps) 
         {/* Footer info lock */}
         <div className="border-t border-zinc-800 px-6 py-4.5 bg-zinc-950/80 text-center">
           <p className="text-[11px] font-mono text-zinc-500">
-            CDM Studio Project Catalog • Terakhir Diperbarui {project.timeline}
+            Project • Terakhir Diperbarui {project.timeline}
           </p>
         </div>
       </motion.div>

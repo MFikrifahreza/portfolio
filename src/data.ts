@@ -1,80 +1,111 @@
+import {
+    collection,
+    doc,
+    getDocs,
+    setDoc,
+    writeBatch,
+} from 'firebase/firestore';
+import { db } from './firebase';
 import { Project } from './types';
 
-export const INITIAL_PROJECTS: Project[] = []
+export const INITIAL_PROJECTS: Project[] = [];
 
-// LocalStorage Persistence Helpers
-const PROJECTS_KEY = 'cdm_portfolio_projects';
-const MESSAGES_KEY = 'cdm_portfolio_messages';
-const ANALYTICS_KEY = 'cdm_portfolio_analytics_events';
+const PROJECTS_COLLECTION = 'projects';
+const MESSAGES_COLLECTION = 'messages';
+const ANALYTICS_COLLECTION = 'analytics';
 
-export const loadProjects = (): Project[] => {
+// Hapus semua field bernilai undefined sebelum dikirim ke Firestore
+// (Firestore menolak field undefined, beda dengan localStorage/JSON biasa)
+const sanitize = (obj: any) => JSON.parse(JSON.stringify(obj));
+
+// ============ PROJECTS ============
+export const loadProjects = async (): Promise<Project[]> => {
   try {
-    const data = localStorage.getItem(PROJECTS_KEY);
-    if (!data) {
-      localStorage.setItem(PROJECTS_KEY, JSON.stringify(INITIAL_PROJECTS));
-      return INITIAL_PROJECTS;
-    }
-    return JSON.parse(data);
+    const snapshot = await getDocs(collection(db, PROJECTS_COLLECTION));
+    if (snapshot.empty) return INITIAL_PROJECTS;
+    return snapshot.docs.map((d) => d.data() as Project);
   } catch (e) {
-    console.error('Error loading projects from localStorage', e);
+    console.error('Error loading projects from Firestore', e);
     return INITIAL_PROJECTS;
   }
 };
 
-export const saveProjects = (projects: Project[]) => {
+export const saveProjects = async (projects: Project[]) => {
   try {
-    localStorage.setItem(PROJECTS_KEY, JSON.stringify(projects));
+    const snapshot = await getDocs(collection(db, PROJECTS_COLLECTION));
+    const batch = writeBatch(db);
+    snapshot.docs.forEach((d) => batch.delete(d.ref));
+    projects.forEach((p) => {
+      batch.set(doc(db, PROJECTS_COLLECTION, p.id), sanitize(p));
+    });
+    await batch.commit();
   } catch (e) {
-    console.error('Error saving projects to localStorage', e);
+    console.error('Error saving projects to Firestore', e);
   }
 };
 
-export const loadMessages = (): any[] => {
+// ============ MESSAGES ============
+export const loadMessages = async (): Promise<any[]> => {
   try {
-    const data = localStorage.getItem(MESSAGES_KEY);
-    return data ? JSON.parse(data) : [];
+    const snapshot = await getDocs(collection(db, MESSAGES_COLLECTION));
+    return snapshot.docs.map((d) => d.data());
   } catch (e) {
-    console.error('Error loading messages from localStorage', e);
+    console.error('Error loading messages from Firestore', e);
     return [];
   }
 };
 
-export const saveMessage = (msg: any) => {
+export const saveMessages = async (messages: any[]) => {
   try {
-    const current = loadMessages();
-    const updated = [msg, ...current];
-    localStorage.setItem(MESSAGES_KEY, JSON.stringify(updated));
+    const snapshot = await getDocs(collection(db, MESSAGES_COLLECTION));
+    const batch = writeBatch(db);
+    snapshot.docs.forEach((d) => batch.delete(d.ref));
+    messages.forEach((m) => {
+      batch.set(doc(db, MESSAGES_COLLECTION, m.id), sanitize(m));
+    });
+    await batch.commit();
   } catch (e) {
-    console.error('Error saving message to localStorage', e);
+    console.error('Error saving messages to Firestore', e);
   }
 };
 
-export const deleteMessage = (id: string) => {
+export const saveMessage = async (msg: any) => {
   try {
-    const current = loadMessages();
-    const updated = current.filter(m => m.id !== id);
-    localStorage.setItem(MESSAGES_KEY, JSON.stringify(updated));
+    await setDoc(doc(db, MESSAGES_COLLECTION, msg.id), sanitize(msg));
   } catch (e) {
-    console.error('Error deleting message from localStorage', e);
+    console.error('Error saving message to Firestore', e);
   }
 };
 
-export const loadAnalyticsEvents = (): any[] => {
+// ============ ANALYTICS ============
+export const loadAnalyticsEvents = async (): Promise<any[]> => {
   try {
-    const data = localStorage.getItem(ANALYTICS_KEY);
-    return data ? JSON.parse(data) : [];
+    const snapshot = await getDocs(collection(db, ANALYTICS_COLLECTION));
+    return snapshot.docs.map((d) => d.data());
   } catch (e) {
-    console.error('Error loading analytics events from localStorage', e);
+    console.error('Error loading analytics events from Firestore', e);
     return [];
   }
 };
 
-export const saveAnalyticsEvent = (event: any) => {
+export const saveAnalyticsEvent = async (event: any) => {
   try {
-    const current = loadAnalyticsEvents();
-    const updated = [event, ...current].slice(0, 800); // Limit to last 800 events to conserve localStorage quota
-    localStorage.setItem(ANALYTICS_KEY, JSON.stringify(updated));
+    await setDoc(doc(db, ANALYTICS_COLLECTION, event.id), sanitize(event));
+
+    // Batasi jumlah dokumen analytics — hapus yang paling lama kalau sudah lebih dari 200
+    const snapshot = await getDocs(collection(db, ANALYTICS_COLLECTION));
+    if (snapshot.size > 5) {
+      const sorted = snapshot.docs.sort((a, b) => {
+        const aId = a.id;
+        const bId = b.id;
+        return aId.localeCompare(bId);
+      });
+      const excess = sorted.slice(0, snapshot.size - 200);
+      const batch = writeBatch(db);
+      excess.forEach((d) => batch.delete(d.ref));
+      await batch.commit();
+    }
   } catch (e) {
-    console.error('Error saving analytics event', e);
+    console.error('Error saving analytics event to Firestore', e);
   }
 };
