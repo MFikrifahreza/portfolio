@@ -18,16 +18,10 @@ export default function ProjectCard({ project, onOpen, index }: ProjectCardProps
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -6 }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl
-border border-white/10
-bg-white/5 backdrop-blur-xl
-shadow-lg shadow-black/30
-p-4 transition-all duration-300
-hover:bg-white/10 hover:border-white/20 hover:shadow-xl hover:shadow-black/50"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-[var(--bg)] timbul p-4 transition-all duration-300"
     >
       {/* Visual Header / Thumbnail */}
-      <div className="relative mb-5 overflow-hidden rounded-xl aspect-16/10
-bg-white/5 backdrop-blur-md border border-white/10">
+      <div className="relative mb-5 overflow-hidden rounded-2xl aspect-16/10 bg-[var(--bg)]">
         <img
           src={project.coverUrl}
           alt={project.title}
@@ -36,45 +30,45 @@ bg-white/5 backdrop-blur-md border border-white/10">
         />
         
         {/* Category Badge overlay */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-black/70 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-emerald-400 border border-zinc-800">
+        <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-[var(--bg)] timbul px-2.5 py-1 text-[10px] tracking-widest uppercase text-[var(--aksen)]">
           <Layers className="h-3 w-3" />
           {project.category}
         </div>
 
         {/* Total views badge overlay on hover */}
-        <div className="absolute right-3 bottom-3 flex items-center gap-1 rounded-full bg-black/65 backdrop-blur-md px-2 py-0.5 text-[10px] font-mono text-zinc-400 border border-zinc-900 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <Eye className="h-3 w-3 text-emerald-400" />
+        <div className="absolute right-3 bottom-3 flex items-center gap-1 rounded-full bg-[var(--bg)] timbul px-2 py-0.5 text-[10px] text-zinc-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <Eye className="h-3 w-3 text-[var(--aksen)]" />
           <span>{project.views} views</span>
         </div>
       </div>
 
       {/* Details */}
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-col grow">
         <div className="flex items-start justify-between">
-          <h3 className="font-display text-xl font-medium text-zinc-100 tracking-tight group-hover:text-amber-400/95 transition-colors duration-300">
+          <h3 className="font-display text-xl font-medium text-zinc-100 tracking-tight group-hover:text-[var(--aksen)] transition-colors duration-300">
             {project.title}
           </h3>
-          <span className="p-1 rounded-full bg-zinc-800/60 text-zinc-400 group-hover:text-emerald-400 group-hover:bg-emerald-950/40 transition-all duration-300">
+          <span className="p-1 rounded-full bg-[var(--bg)] timbul text-zinc-400 group-hover:text-[var(--aksen)] transition-all duration-300">
             <ArrowUpRight className="h-4.5 w-4.5 transform transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
         </div>
         
-        <p className="mt-2 text-sm text-zinc-400 font-sans line-clamp-3 leading-relaxed">
+        <p className="mt-2 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
           {project.description}
         </p>
 
         {/* Tags List */}
-        <div className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-zinc-800/40">
+        <div className="mt-4 flex flex-wrap gap-2 pt-3">
           {project.tags.slice(0, 3).map((tag, i) => (
             <span
               key={i}
-              className="rounded-md bg-zinc-800/40 px-2 py-0.5 text-[10px] font-mono text-zinc-400 tracking-tight hover:bg-zinc-800 hover:text-zinc-200 transition-colors"
+              className="rounded-lg bg-[var(--bg)] cekung px-2.5 py-1 text-[10px] text-zinc-400 tracking-tight hover:text-[var(--aksen)] transition-colors"
             >
               #{tag}
             </span>
           ))}
           {project.tags.length > 3 && (
-            <span className="rounded-md bg-zinc-800/20 px-1.5 py-0.5 text-[10px] font-mono text-zinc-500">
+            <span className="rounded-lg bg-[var(--bg)] cekung px-2.5 py-1 text-[10px] text-zinc-500">
               +{project.tags.length - 3} more
             </span>
           )}

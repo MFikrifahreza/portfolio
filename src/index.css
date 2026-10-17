@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @theme {
-    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-    --font-display: 'Space Grotesk', 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'Plus Jakarta Sans', sans-serif;
 }
 
 
@@ -41,9 +41,20 @@
 body {
     font-family: var(--font-sans);
     overflow-x: hidden;
-    background-color: #0d0e11;
+    background-color: var(--bg);
     /* Off-black for premium contrast */
 }
+
+:root {
+  --bg: #1e2230;
+  --aksen: #547acc;
+  --timbul: 8px 8px 16px #141722, -2px -2px 6px #3a4060, inset 1px 1px 1px #3a4060;
+  --cekung: inset 5px 5px 10px #141722, inset -5px -5px 10px #2a2f42;
+}
+
+.timbul { box-shadow: var(--timbul); }
+.cekung { box-shadow: var(--cekung); }
+.tombol:hover { box-shadow: var(--cekung); }
 
 
 /* Custom typing cursor */

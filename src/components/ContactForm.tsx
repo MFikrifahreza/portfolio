@@ -81,7 +81,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
   };
 
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 md:p-8 backdrop-blur-md">
+    <div className="rounded-3xl bg-[var(--bg)] timbul p-6 md:p-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h3 className="font-display text-2xl font-bold text-white tracking-tight">
@@ -91,7 +91,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             Kirim ide proyek, pertanyaan bisnis, atau say hello. Kami siap berkolaborasi.
           </p>
         </div>
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-sm tracking-wider font-semibold">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--bg)] timbul text-[var(--aksen)] text-sm tracking-wider font-semibold">
           MF
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
           >
             {/* Name Input */}
             <div>
-              <label htmlFor="name" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1.5">
+              <label htmlFor="name" className="text-xs uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1.5">
                 <User className="h-3.5 w-3.5 text-zinc-500" /> Nama Lengkap
               </label>
               <input
@@ -118,8 +118,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Masukkan nama Anda..."
-                className={`w-full rounded-lg border bg-zinc-950/60 px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-1 transition-all ${
-                  errors.name ? 'border-red-500/60 focus:ring-red-500/50' : 'border-zinc-800 focus:border-emerald-500 focus:ring-emerald-500/40'
+                className={`w-full rounded-xl bg-[var(--bg)] cekung px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 outline outline-1 transition-all ${
+                  errors.name ? 'outline-red-500/60' : 'outline-transparent focus:outline-[var(--aksen)]'
                 }`}
               />
               {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
@@ -127,7 +127,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
 
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1.5">
+              <label htmlFor="email" className="text-xs uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1.5">
                 <Mail className="h-3.5 w-3.5 text-zinc-500" /> Alamat Email
               </label>
               <input
@@ -137,8 +137,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="nama@email.com"
-                className={`w-full rounded-lg border bg-zinc-950/60 px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-1 transition-all ${
-                  errors.email ? 'border-red-500/60 focus:ring-red-500/50' : 'border-zinc-800 focus:border-emerald-500 focus:ring-emerald-500/40'
+                className={`w-full rounded-xl bg-[var(--bg)] cekung px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 outline outline-1 transition-all ${
+                  errors.email ? 'outline-red-500/60' : 'outline-transparent focus:outline-[var(--aksen)]'
                 }`}
               />
               {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
@@ -146,7 +146,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
 
             {/* Subject Input */}
             <div>
-              <label htmlFor="subject" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1.5">
+              <label htmlFor="subject" className="text-xs uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1.5">
                 <MessageSquare className="h-3.5 w-3.5 text-zinc-500" /> Subjek Pesan
               </label>
               <input
@@ -156,8 +156,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
                 value={formData.subject}
                 onChange={handleChange}
                 placeholder="Misal: Kerja Sama, Kemitraan Proyek"
-                className={`w-full rounded-lg border bg-zinc-950/60 px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-1 transition-all ${
-                  errors.subject ? 'border-red-500/60 focus:ring-red-500/50' : 'border-zinc-800 focus:border-emerald-500 focus:ring-emerald-500/40'
+                className={`w-full rounded-xl bg-[var(--bg)] cekung px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 outline outline-1 transition-all ${
+                  errors.subject ? 'outline-red-500/60' : 'outline-transparent focus:outline-[var(--aksen)]'
                 }`}
               />
               {errors.subject && <p className="mt-1 text-xs text-red-400">{errors.subject}</p>}
@@ -165,7 +165,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
 
             {/* Message Area */}
             <div>
-              <label htmlFor="message" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
+              <label htmlFor="message" className="block text-xs uppercase tracking-wider text-zinc-400 mb-1.5">
                 Deskripsi Pesan / Ide Proyek
               </label>
               <textarea
@@ -175,8 +175,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Tuliskan ide kreatif Anda di sini secara lengkap..."
-                className={`w-full rounded-lg border bg-zinc-950/60 px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-1 transition-all resize-none ${
-                  errors.message ? 'border-red-500/60 focus:ring-red-500/50' : 'border-zinc-800 focus:border-emerald-500 focus:ring-emerald-500/40'
+                className={`w-full rounded-xl bg-[var(--bg)] cekung px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 outline outline-1 transition-all resize-none ${
+                  errors.message ? 'outline-red-500/60' : 'outline-transparent focus:outline-[var(--aksen)]'
                 }`}
               />
               {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
@@ -187,11 +187,11 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
               type="submit"
               id="btn-submit-contact"
               disabled={isSubmitting}
-              className="mt-2 w-full flex items-center justify-center gap-2 rounded-lg bg-emerald-500 py-3 text-sm font-semibold text-black hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 transition-colors disabled:opacity-50 cursor-pointer"
+              className="tombol mt-2 w-full flex items-center justify-center gap-2 rounded-xl bg-[var(--bg)] timbul py-3 text-sm font-semibold text-[var(--aksen)] transition-all disabled:opacity-50 cursor-pointer"
             >
               {isSubmitting ? (
                 <>
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent" />
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-[var(--aksen)] border-t-transparent" />
                   Mengirimkan...
                 </>
               ) : (
@@ -210,19 +210,19 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             exit={{ opacity: 0 }}
             className="flex flex-col items-center justify-center py-10 text-center"
           >
-            <div className="rounded-full bg-emerald-500/10 p-4 border border-emerald-500/30 text-emerald-400 mb-4 animate-bounce">
+            <div className="rounded-full bg-[var(--bg)] timbul p-4 text-[var(--aksen)] mb-4 animate-bounce">
               <CheckCircle2 className="h-8 w-8" />
             </div>
             <h4 className="font-display text-xl font-bold text-white tracking-tight">
               Pesan Terkirim dengan Sukses!
             </h4>
-            <p className="mt-2 max-w-sm text-sm text-zinc-400 leading-relaxed font-sans">
+            <p className="mt-2 max-w-sm text-sm text-zinc-400 leading-relaxed">
               Terima kasih telah menghubungi kami. Tim kreatif kami akan meninjau pesan Anda dan segera menghubungi Anda kembali dalam kurun waktu 1x24 jam.
             </p>
             <button
               id="btn-send-again"
               onClick={() => setSubmitted(false)}
-              className="mt-6 flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:text-emerald-300 hover:underline cursor-pointer"
+              className="mt-6 flex items-center gap-1.5 text-xs text-[var(--aksen)] hover:text-white cursor-pointer"
             >
               <Sparkles className="h-4 w-4" />
               Kirim Pesan Baru Lagi

@@ -251,28 +251,28 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl p-4 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#141722]/80 p-4 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.4 }}
-        className="relative flex h-full max-h-[90vh] w-full max-w-5xl flex-col rounded-2xl border border-white/15 bg-[#0a0b10]/50 backdrop-blur-2xl shadow-2xl shadow-black/60 overflow-hidden focus:outline-none"
+        className="relative flex h-full max-h-[90vh] w-full max-w-5xl flex-col rounded-3xl bg-[var(--bg)] timbul overflow-hidden focus:outline-none"
       >
-        {/* Title bar - Glassmorphism */}
-        <div className="flex items-center justify-between border-b border-white/10 bg-white/5 backdrop-blur-sm px-6 py-4.5">
+        {/* Title bar */}
+        <div className="relative z-10 flex items-center justify-between bg-[var(--bg)] timbul px-6 py-4.5">
           <div className="flex items-center gap-2.5">
-            <span className="p-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
+            <span className="p-1.5 rounded-xl bg-[var(--bg)] timbul text-[var(--aksen)]">
               <Server className="h-5 w-5" />
             </span>
             <div>
               <h2 className="font-display text-lg font-bold text-white tracking-tight flex items-center gap-2">
                 Portfolio Dashboard
-                <span className="inline-block rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 px-2 py-0.5 text-[10px] uppercase font-mono tracking-widest leading-none">
+                <span className="inline-block rounded-full bg-[var(--bg)] cekung text-[var(--aksen)] px-2 py-0.5 text-[10px] uppercase tracking-widest leading-none">
                   Admin
                 </span>
               </h2>
-              <p className="text-[11px] text-zinc-400 font-mono">
+              <p className="text-[11px] text-zinc-400">
                 Kelola Konten, Analytics & Pesan
               </p>
             </div>
@@ -280,7 +280,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
           <button
             id="btn-close-admin"
             onClick={onClose}
-            className="rounded-lg p-2 text-zinc-400 hover:bg-white/10 hover:text-white transition-all duration-300 cursor-pointer"
+            className="tombol rounded-xl p-2 bg-[var(--bg)] timbul text-zinc-400 hover:text-white transition-all duration-300 cursor-pointer"
             aria-label="Tutup Administrator"
           >
             <X className="h-5 w-5" />
@@ -288,7 +288,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
         </div>
 
         {/* Tab Selector */}
-        <div className="flex border-b border-white/10 bg-white/3 backdrop-blur-sm px-3.5 pt-2">
+        <div className="flex gap-2 bg-[var(--bg)] px-3.5 py-3">
           <button
             id="tab-btn-cms"
             onClick={() => {
@@ -296,10 +296,10 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
               setIsCreatingNew(false);
               setEditingProject(null);
             }}
-            className={`flex items-center gap-2 px-4 py-3 text-xs font-mono border-b-2 tracking-tight transition-all duration-300 font-medium ${
+            className={`flex items-center gap-2 px-4 py-2.5 text-xs rounded-xl tracking-tight transition-all duration-300 font-medium ${
               activeTab === "cms"
-                ? "border-emerald-500 text-emerald-400"
-                : "border-transparent text-zinc-400 hover:text-zinc-200"
+                ? "bg-[var(--bg)] timbul text-[var(--aksen)]"
+                : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
             <Database className="h-4 w-4" />
@@ -313,10 +313,10 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
               setIsCreatingNew(false);
               setEditingProject(null);
             }}
-            className={`flex items-center gap-2 px-4 py-3 text-xs font-mono border-b-2 tracking-tight transition-all duration-300 font-medium ${
+            className={`flex items-center gap-2 px-4 py-2.5 text-xs rounded-xl tracking-tight transition-all duration-300 font-medium ${
               activeTab === "analytics"
-                ? "border-emerald-500 text-emerald-400"
-                : "border-transparent text-zinc-400 hover:text-zinc-200"
+                ? "bg-[var(--bg)] timbul text-[var(--aksen)]"
+                : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
             <BarChart3 className="h-4 w-4" />
@@ -330,16 +330,16 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
               setIsCreatingNew(false);
               setEditingProject(null);
             }}
-            className={`flex items-center gap-2 px-4 py-3 text-xs font-mono border-b-2 tracking-tight transition-all duration-300 relative font-medium ${
+            className={`flex items-center gap-2 px-4 py-2.5 text-xs rounded-xl tracking-tight transition-all duration-300 relative font-medium ${
               activeTab === "inbox"
-                ? "border-emerald-500 text-emerald-400"
-                : "border-transparent text-zinc-400 hover:text-zinc-200"
+                ? "bg-[var(--bg)] timbul text-[var(--aksen)]"
+                : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
             <Inbox className="h-4 w-4" />
             Pesan
             {messages.filter((m) => m.status === "unread").length > 0 && (
-              <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-amber-500/90 px-1 text-[9px] font-bold text-black font-mono">
+              <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--aksen)] px-1 text-[9px] font-bold text-white">
                 {messages.filter((m) => m.status === "unread").length}
               </span>
             )}
@@ -347,7 +347,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-y-auto p-6 bg-[#0a0b10]">
+        <div className="flex-1 overflow-y-auto p-6 bg-[var(--bg)]">
           {/* TAB 1: CMS SECTION */}
           {activeTab === "cms" && (
             <div id="cms-tab-content">
@@ -362,11 +362,11 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         Kelola deskripsi, cover, tag, dan metadata proyek.
                       </p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-3">
                       <button
                         id="btn-cms-reset"
                         onClick={onResetProjects}
-                        className="flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 px-3.5 py-2 text-xs font-mono text-zinc-300 transition-all duration-300 cursor-pointer"
+                        className="tombol flex items-center gap-1.5 rounded-xl bg-[var(--bg)] timbul px-3.5 py-2 text-xs text-zinc-300 transition-all duration-300 cursor-pointer"
                       >
                         <RefreshCw className="h-3.5 w-3.5" />
                         Reset
@@ -374,7 +374,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                       <button
                         id="btn-cms-add"
                         onClick={handleOpenCreateAndInit}
-                        className="flex items-center gap-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 px-4 py-2 text-xs font-semibold text-black transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
+                        className="tombol flex items-center gap-1.5 rounded-xl bg-[var(--bg)] timbul px-4 py-2 text-xs font-semibold text-[var(--aksen)] transition-all duration-300 cursor-pointer"
                       >
                         <Plus className="h-4 w-4" />
                         Tambah Proyek
@@ -383,7 +383,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   </div>
 
                   {projects.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center border border-dashed border-white/10 rounded-xl py-14 text-center bg-white/3 backdrop-blur-sm">
+                    <div className="flex flex-col items-center justify-center rounded-2xl py-14 text-center bg-[var(--bg)] cekung">
                       <AlertCircle className="h-10 w-10 text-zinc-600 mb-3" />
                       <p className="text-sm text-zinc-300 font-medium">
                         Belum ada proyek.
@@ -393,14 +393,14 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                       </p>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 gap-3">
+                    <div className="grid grid-cols-1 gap-4">
                       {projects.map((project) => (
                         <div
                           key={project.id}
-                          className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm p-4 transition-all duration-300 hover:bg-white/8 hover:border-white/15"
+                          className="flex items-center justify-between rounded-2xl bg-[var(--bg)] timbul p-4 transition-all duration-300"
                         >
                           <div className="flex items-center gap-4 overflow-hidden">
-                            <div className="h-12 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-white/10 border border-white/20">
+                            <div className="h-12 w-16 shrink-0 overflow-hidden rounded-xl bg-[var(--bg)] cekung">
                               <img
                                 src={project.coverUrl}
                                 alt={project.title}
@@ -413,11 +413,11 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                                 <h4 className="text-sm font-semibold text-white truncate">
                                   {project.title}
                                 </h4>
-                                <span className="rounded bg-white/15 border border-white/20 text-zinc-300 px-1.5 py-0.5 text-[9px] font-mono uppercase">
+                                <span className="rounded-lg bg-[var(--bg)] cekung text-zinc-300 px-1.5 py-0.5 text-[9px] uppercase">
                                   {project.category}
                                 </span>
                                 {project.featured && (
-                                  <span className="rounded bg-amber-500/20 border border-amber-500/40 text-amber-400 px-1.5 py-0.5 text-[9px] font-mono">
+                                  <span className="rounded-lg bg-[var(--bg)] cekung text-[var(--aksen)] px-1.5 py-0.5 text-[9px]">
                                     Featured
                                   </span>
                                 )}
@@ -428,18 +428,18 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-1.5 ml-4">
+                          <div className="flex items-center gap-2 ml-4">
                             <button
                               id={`btn-edit-project-${project.id}`}
                               onClick={() => handleOpenEdit(project)}
-                              className="rounded p-2 text-zinc-400 hover:bg-white/15 hover:text-white transition-all duration-300 cursor-pointer"
+                              className="tombol rounded-xl p-2 bg-[var(--bg)] timbul text-zinc-400 hover:text-white transition-all duration-300 cursor-pointer"
                             >
                               <Edit3 className="h-4 w-4" />
                             </button>
                             <button
                               id={`btn-delete-project-${project.id}`}
                               onClick={() => handleDeleteProject(project.id)}
-                              className="rounded p-2 text-zinc-500 hover:bg-red-500/15 hover:text-red-400 transition-all duration-300 cursor-pointer"
+                              className="tombol rounded-xl p-2 bg-[var(--bg)] timbul text-zinc-500 hover:text-red-400 transition-all duration-300 cursor-pointer"
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
@@ -456,8 +456,8 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   onSubmit={handleSaveProject}
                   className="space-y-5"
                 >
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <h3 className="font-display font-semibold text-md text-emerald-400">
+                  <div className="flex items-center justify-between pb-3">
+                    <h3 className="font-display font-semibold text-md text-[var(--aksen)]">
                       {isCreatingNew ? "Proyek Baru" : `Edit: ${formTitle}`}
                     </h3>
                     <button
@@ -467,7 +467,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         setIsCreatingNew(false);
                         setEditingProject(null);
                       }}
-                      className="text-xs font-mono text-zinc-400 hover:text-white transition-colors duration-300"
+                      className="text-xs text-zinc-400 hover:text-white transition-colors duration-300"
                     >
                       Batalkan
                     </button>
@@ -478,7 +478,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_title"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Judul
                       </label>
@@ -489,7 +489,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formTitle}
                         onChange={(e) => setFormTitle(e.target.value)}
                         placeholder="Contoh: Portfolio Web"
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
 
@@ -497,7 +497,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_subtitle"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Sub-judul
                       </label>
@@ -507,7 +507,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formSubtitle}
                         onChange={(e) => setFormSubtitle(e.target.value)}
                         placeholder="Deskripsi singkat..."
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
                   </div>
@@ -516,7 +516,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   <div>
                     <label
                       htmlFor="form_desc"
-                      className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                      className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                     >
                       Deskripsi Singkat
                     </label>
@@ -527,7 +527,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                       value={formDescription}
                       onChange={(e) => setFormDescription(e.target.value)}
                       placeholder="Ringkasan dalam satu kalimat..."
-                      className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                      className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                     />
                   </div>
 
@@ -536,7 +536,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_cat"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Kategori
                       </label>
@@ -544,7 +544,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         id="form_cat"
                         value={formCategory}
                         onChange={(e) => setFormCategory(e.target.value as any)}
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       >
                         <option value="web">Web Application</option>
                         <option value="mobile">Mobile Application</option>
@@ -557,7 +557,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_timeline"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Timeline
                       </label>
@@ -567,7 +567,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formTimeline}
                         onChange={(e) => setFormTimeline(e.target.value)}
                         placeholder="Contoh: Maret - Mei 2026"
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
 
@@ -575,7 +575,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_tags"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Tags (Pisah koma)
                       </label>
@@ -585,7 +585,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formTags}
                         onChange={(e) => setFormTags(e.target.value)}
                         placeholder="React, Web3, Framer"
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
                   </div>
@@ -595,7 +595,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_role"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Peran Saya
                       </label>
@@ -605,7 +605,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formRole}
                         onChange={(e) => setFormRole(e.target.value)}
                         placeholder="Frontend Developer"
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
 
@@ -613,7 +613,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_client"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Klien (Opsional)
                       </label>
@@ -623,7 +623,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formClient}
                         onChange={(e) => setFormClient(e.target.value)}
                         placeholder="Universitas Pamulang"
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
                   </div>
@@ -631,12 +631,12 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   {/* Cover Image Selection */}
                   {/* Cover Image Selection - Manual Local File */}
                   <div>
-                    <label className="block text-[11px] font-mono uppercase text-zinc-400 mb-2">
+                    <label className="block text-[11px] uppercase text-zinc-400 mb-2">
                       Cover Proyek
                     </label>
 
                     {/* Preview */}
-                    <div className="mb-3 aspect-[16/9] w-full max-w-xs overflow-hidden rounded-lg border border-white/15 bg-white/5">
+                    <div className="mb-3 aspect-video w-full max-w-xs overflow-hidden rounded-xl bg-[var(--bg)] cekung">
                       {formCoverUrl ? (
                         <img
                           src={formCoverUrl}
@@ -648,7 +648,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                           }}
                         />
                       ) : (
-                        <div className="flex h-full items-center justify-center text-xs text-zinc-500 font-mono">
+                        <div className="flex h-full items-center justify-center text-xs text-zinc-500">
                           Belum ada cover
                         </div>
                       )}
@@ -662,13 +662,13 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                       value={formCoverUrl}
                       onChange={(e) => setFormCoverUrl(e.target.value)}
                       placeholder="/projects/projek2.png"
-                      className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                      className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                     />
                     <p className="text-[10px] text-zinc-500 mt-1.5 leading-relaxed">
                       Taruh file gambar di folder{" "}
-                      <code className="text-emerald-400">public/projects/</code>
+                      <code className="text-[var(--aksen)]">public/projects/</code>
                       , lalu ketik path-nya di sini. Contoh:{" "}
-                      <code className="text-emerald-400">
+                      <code className="text-[var(--aksen)]">
                         /projects/portfolio-web.jpg
                       </code>
                     </p>
@@ -679,7 +679,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_web_url"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         Demo Website URL
                       </label>
@@ -689,7 +689,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formWebsiteUrl}
                         onChange={(e) => setFormWebsiteUrl(e.target.value)}
                         placeholder="https://demo.com"
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
 
@@ -697,7 +697,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div>
                       <label
                         htmlFor="form_git_url"
-                        className="block text-[11px] font-mono uppercase text-zinc-400 mb-1.5"
+                        className="block text-[11px] uppercase text-zinc-400 mb-1.5"
                       >
                         GitHub Repository
                       </label>
@@ -707,7 +707,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         value={formGithubUrl}
                         onChange={(e) => setFormGithubUrl(e.target.value)}
                         placeholder="https://github.com/user/repo"
-                        className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                        className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white placeholder-zinc-500 outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       />
                     </div>
                   </div>
@@ -717,11 +717,11 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                     <div className="flex justify-between items-center mb-1.5">
                       <label
                         htmlFor="form_content"
-                        className="block text-[11px] font-mono uppercase text-zinc-400"
+                        className="block text-[11px] uppercase text-zinc-400"
                       >
                         Konten Detail
                       </label>
-                      <span className="text-[10px] text-zinc-500 font-mono">
+                      <span className="text-[10px] text-zinc-500">
                         Markdown supported
                       </span>
                     </div>
@@ -731,18 +731,18 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                       rows={6}
                       value={formContent}
                       onChange={(e) => setFormContent(e.target.value)}
-                      className="w-full rounded-lg border border-white/15 bg-white/5 backdrop-blur-sm px-3.5 py-2 text-sm text-white font-mono focus:outline-none focus:border-emerald-500/60 focus:bg-white/10 transition-all duration-300"
+                      className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                     />
                   </div>
 
                   {/* Featured Toggle */}
-                  <div className="flex items-center gap-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 p-3">
+                  <div className="flex items-center gap-2 rounded-xl bg-[var(--bg)] cekung p-3">
                     <input
                       type="checkbox"
                       id="form_featured"
                       checked={formFeatured}
                       onChange={(e) => setFormFeatured(e.target.checked)}
-                      className="h-4.5 w-4.5 accent-emerald-500 bg-white/10 border-white/20 rounded focus:ring-0"
+                      className="h-4.5 w-4.5 accent-[var(--aksen)] rounded focus:ring-0"
                     />
                     <div>
                       <label
@@ -758,7 +758,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   </div>
 
                   {/* Save buttons */}
-                  <div className="flex justify-end gap-2.5 pt-2 border-t border-white/10">
+                  <div className="flex justify-end gap-3 pt-2">
                     <button
                       type="button"
                       id="btn-form-cancel-bottom"
@@ -766,14 +766,14 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         setIsCreatingNew(false);
                         setEditingProject(null);
                       }}
-                      className="rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 px-5 py-2.5 text-xs font-semibold text-zinc-300 transition-all duration-300 cursor-pointer"
+                      className="tombol rounded-xl bg-[var(--bg)] timbul px-5 py-2.5 text-xs font-semibold text-zinc-300 transition-all duration-300 cursor-pointer"
                     >
                       Batalkan
                     </button>
                     <button
                       type="submit"
                       id="btn-form-save-project"
-                      className="rounded-lg bg-emerald-500 hover:bg-emerald-400 px-6 py-2.5 text-xs font-bold text-black transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
+                      className="tombol rounded-xl bg-[var(--bg)] timbul px-6 py-2.5 text-xs font-bold text-[var(--aksen)] transition-all duration-300 cursor-pointer"
                     >
                       Simpan Proyek
                     </button>
@@ -788,12 +788,12 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
             <div id="analytics-tab-content" className="space-y-6">
               {/* Metrics Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                <div className="rounded-lg border border-white/15 bg-white/8 backdrop-blur-xl p-4 flex flex-col justify-between">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <Eye className="h-3 w-3 text-emerald-400" /> Kunjungan
+                <div className="rounded-2xl bg-[var(--bg)] timbul p-4 flex flex-col justify-between">
+                  <span className="text-[10px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <Eye className="h-3 w-3 text-[var(--aksen)]" /> Kunjungan
                   </span>
                   <div className="mt-2.5">
-                    <span className="text-3xl font-bold font-mono text-emerald-400">
+                    <span className="text-3xl font-bold text-[var(--aksen)]">
                       {totalVisits + 1}
                     </span>
                     <span className="text-[10px] text-zinc-500 block">
@@ -802,13 +802,13 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-white/15 bg-white/8 backdrop-blur-xl p-4 flex flex-col justify-between">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <TrendingUp className="h-3 w-3 text-emerald-400" />{" "}
+                <div className="rounded-2xl bg-[var(--bg)] timbul p-4 flex flex-col justify-between">
+                  <span className="text-[10px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <TrendingUp className="h-3 w-3 text-[var(--aksen)]" />{" "}
                     Engagement
                   </span>
                   <div className="mt-2.5">
-                    <span className="text-3xl font-bold font-mono text-emerald-400">
+                    <span className="text-3xl font-bold text-[var(--aksen)]">
                       {projectDetailsTotalViews}
                     </span>
                     <span className="text-[10px] text-zinc-500 block">
@@ -817,12 +817,12 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-white/15 bg-white/8 backdrop-blur-xl p-4 flex flex-col justify-between">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <Inbox className="h-3 w-3 text-emerald-400" /> Pesan
+                <div className="rounded-2xl bg-[var(--bg)] timbul p-4 flex flex-col justify-between">
+                  <span className="text-[10px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <Inbox className="h-3 w-3 text-[var(--aksen)]" /> Pesan
                   </span>
                   <div className="mt-2.5">
-                    <span className="text-3xl font-bold font-mono text-emerald-400">
+                    <span className="text-3xl font-bold text-[var(--aksen)]">
                       {totalFormSubmits}
                     </span>
                     <span className="text-[10px] text-zinc-500 block">
@@ -831,12 +831,12 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-white/15 bg-white/8 backdrop-blur-xl p-4 flex flex-col justify-between">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <Clock className="h-3 w-3 text-emerald-400" /> Session
+                <div className="rounded-2xl bg-[var(--bg)] timbul p-4 flex flex-col justify-between">
+                  <span className="text-[10px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <Clock className="h-3 w-3 text-[var(--aksen)]" /> Session
                   </span>
                   <div className="mt-2.5">
-                    <span className="text-2xl font-bold font-mono text-zinc-200 tracking-tight">
+                    <span className="text-2xl font-bold text-zinc-200 tracking-tight">
                       {formatSecs(activeSeconds)}
                     </span>
                     <span className="text-[10px] text-zinc-500 block">
@@ -847,9 +847,9 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
               </div>
 
               {/* Engagement Chart */}
-              <div className="rounded-lg border border-white/15 bg-white/8 backdrop-blur-xl p-5">
+              <div className="rounded-2xl bg-[var(--bg)] timbul p-5">
                 <h4 className="font-display font-semibold text-sm text-zinc-200 mb-4 flex items-center gap-2">
-                  <Sparkle className="h-4 w-4 text-emerald-400" /> Engagement
+                  <Sparkle className="h-4 w-4 text-[var(--aksen)]" /> Engagement
                   Per Proyek
                 </h4>
                 <div className="space-y-3.5">
@@ -862,20 +862,20 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
 
                     return (
                       <div key={index} className="space-y-1">
-                        <div className="flex justify-between text-xs font-mono">
+                        <div className="flex justify-between text-xs">
                           <span className="text-zinc-300 truncate max-w-sm">
                             {p.title}
                           </span>
-                          <span className="text-emerald-400 font-semibold">
+                          <span className="text-[var(--aksen)] font-semibold">
                             {p.views} views
                           </span>
                         </div>
-                        <div className="h-3 w-full rounded-full bg-white/5 backdrop-blur-sm overflow-hidden border border-white/10">
+                        <div className="h-3 w-full rounded-full bg-[var(--bg)] cekung overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${percent}%` }}
                             transition={{ duration: 0.8 }}
-                            className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400/70"
+                            className="h-full rounded-full bg-[var(--aksen)]"
                           />
                         </div>
                       </div>
@@ -885,17 +885,17 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
               </div>
 
               {/* Activity Feed */}
-              <div className="rounded-lg border border-white/15 bg-white/8 backdrop-blur-xl p-5">
+              <div className="rounded-2xl bg-[var(--bg)] timbul p-5">
                 <div className="flex items-center justify-between mb-4">
                   <h4 className="font-display font-semibold text-sm text-zinc-200 flex items-center gap-1.5">
-                    <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+                    <span className="inline-block h-2 w-2 rounded-full bg-[var(--aksen)]" />
                     Aktivitas langsung
                   </h4>
-                  <span className="text-[10px] text-zinc-500 font-mono">
+                  <span className="text-[10px] text-zinc-500">
                     Real-time
                   </span>
                 </div>
-                <div className="max-h-56 overflow-y-auto space-y-2.5 rounded-lg bg-black/30 border border-white/10 p-3.5 font-mono text-[11px] leading-relaxed text-zinc-400">
+                <div className="max-h-56 overflow-y-auto space-y-2.5 rounded-xl bg-[var(--bg)] cekung p-3.5 text-[11px] leading-relaxed text-zinc-400">
                   {events.length === 0 ? (
                     <p className="text-center text-zinc-600 py-4">
                       Aktivitas akan muncul di sini.
@@ -920,7 +920,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                           break;
                         case "contact_submit":
                           typeLabel = "[SUBMIT]";
-                          typeColor = "text-emerald-400 font-semibold";
+                          typeColor = "text-[var(--aksen)] font-semibold";
                           break;
                         default:
                           typeLabel = "[EVENT]";
@@ -931,17 +931,17 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                           key={evt.id}
                           className="flex items-start gap-2 border-b border-white/5 pb-1.5 last:border-0 last:pb-0"
                         >
-                          <span className="text-[10px] text-zinc-600 flex-shrink-0">
+                          <span className="text-[10px] text-zinc-600 shrink-0">
                             {evt.timestamp}
                           </span>
                           <span
-                            className={`${typeColor} uppercase flex-shrink-0`}
+                            className={`${typeColor} uppercase shrink-0`}
                           >
                             {typeLabel}
                           </span>
                           <span className="text-zinc-300">{evt.detail}</span>
                           {evt.device && (
-                            <span className="text-[10px] text-emerald-500/50 ml-auto flex-shrink-0">
+                            <span className="text-[10px] text-zinc-500 ml-auto shrink-0">
                               ({evt.device})
                             </span>
                           )}
@@ -967,7 +967,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
               </div>
 
               {messages.length === 0 ? (
-                <div className="flex flex-col items-center justify-center border border-dashed border-white/10 rounded-lg py-14 text-center bg-white/3 backdrop-blur-sm">
+                <div className="flex flex-col items-center justify-center rounded-2xl py-14 text-center bg-[var(--bg)] cekung">
                   <Inbox className="h-10 w-10 text-zinc-600 mb-3" />
                   <p className="text-sm text-zinc-300 font-medium">
                     Kotak Masuk Kosong
@@ -977,14 +977,12 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                   </p>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {messages.map((msg) => (
                     <div
                       key={msg.id}
-                      className={`rounded-lg border p-4 transition-all duration-300 ${
-                        msg.status === "unread"
-                          ? "border-emerald-500/40 bg-emerald-500/10 backdrop-blur-sm"
-                          : "border-white/10 bg-white/5 backdrop-blur-sm"
+                      className={`rounded-2xl bg-[var(--bg)] p-4 transition-all duration-300 ${
+                        msg.status === "unread" ? "timbul" : "cekung"
                       }`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2.5">
@@ -993,25 +991,25 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                             <span className="text-sm font-semibold text-white">
                               {msg.name}
                             </span>
-                            <span className="text-xs text-emerald-400 font-mono">
+                            <span className="text-xs text-[var(--aksen)]">
                               ({msg.email})
                             </span>
                           </div>
-                          <span className="text-xs font-semibold text-amber-400 block">
+                          <span className="text-xs font-semibold text-zinc-200 block">
                             Subj: {msg.subject}
                           </span>
                         </div>
                         <div className="flex items-center gap-2 self-end sm:self-start">
-                          <span className="text-[10px] font-mono text-zinc-500 mr-1.5">
+                          <span className="text-[10px] text-zinc-500 mr-1.5">
                             {msg.timestamp}
                           </span>
                           <button
                             id={`btn-read-toggle-${msg.id}`}
                             onClick={() => handleToggleMessageStatus(msg.id)}
-                            className={`rounded px-2.5 py-1 text-[10px] font-mono transition-all duration-300 border cursor-pointer ${
+                            className={`tombol rounded-lg bg-[var(--bg)] px-2.5 py-1 text-[10px] transition-all duration-300 cursor-pointer ${
                               msg.status === "unread"
-                                ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/30"
-                                : "bg-white/5 border-white/10 text-zinc-400 hover:bg-white/10 hover:text-white"
+                                ? "timbul text-[var(--aksen)]"
+                                : "cekung text-zinc-400 hover:text-white"
                             }`}
                           >
                             {msg.status === "unread" ? "Baca" : "Unread"}
@@ -1019,7 +1017,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                           <button
                             id={`btn-delete-msg-${msg.id}`}
                             onClick={() => handleDeleteMessage(msg.id)}
-                            className="rounded p-1.5 border border-white/10 text-zinc-400 hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300 cursor-pointer"
+                            className="tombol rounded-lg p-1.5 bg-[var(--bg)] timbul text-zinc-400 hover:text-red-400 transition-all duration-300 cursor-pointer"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -1027,7 +1025,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                       </div>
 
                       {/* Message Content */}
-                      <div className="mt-3 border-t border-white/10 bg-black/20 rounded-lg p-3 text-xs leading-relaxed text-zinc-300 font-sans">
+                      <div className="mt-3 bg-[var(--bg)] cekung rounded-xl p-3 text-xs leading-relaxed text-zinc-300">
                         {msg.message}
                       </div>
                     </div>
@@ -1039,12 +1037,12 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
         </div>
 
         {/* Footer Bar */}
-        <div className="border-t border-white/10 bg-white/5 backdrop-blur-sm px-6 py-4.5 flex items-center justify-between">
-          <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest flex items-center gap-1.5">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+        <div className="bg-[var(--bg)] cekung px-6 py-4.5 flex items-center justify-between">
+          <p className="text-[10px] text-zinc-500 uppercase tracking-widest flex items-center gap-1.5">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--aksen)]" />
             Online
           </p>
-          <p className="text-[10px] font-mono text-zinc-550">
+          <p className="text-[10px] text-zinc-500">
             MFIzaaa Portfolio Admin • V1.0
           </p>
         </div>
