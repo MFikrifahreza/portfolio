@@ -29,6 +29,16 @@ interface AdminPanelProps {
   onClose: () => void;
 }
 
+
+const CATEGORY_LABELS: Record<string, string> = {
+  web: "Web Application",
+  mobile: "Mobile Application",
+  branding: "Creative Branding",
+  experimental: "Experimental",
+  game: "Game Development",
+};
+
+
 export default function AdminPanel({
   projects,
   messages,
@@ -56,9 +66,9 @@ export default function AdminPanel({
   const [formDescription, setFormDescription] = useState("");
   const [formContent, setFormContent] = useState("");
   const [formCoverUrl, setFormCoverUrl] = useState("");
-  const [formCategory, setFormCategory] = useState<
-    "web" | "mobile" | "branding" | "experimental"
-  >("web");
+const [formCategory, setFormCategory] = useState<
+  "web" | "mobile" | "branding" | "experimental" | "game"
+>("web");
   const [formTags, setFormTags] = useState("");
   const [formTimeline, setFormTimeline] = useState("");
   const [formRole, setFormRole] = useState("");
@@ -414,7 +424,7 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                                   {project.title}
                                 </h4>
                                 <span className="rounded-lg bg-[var(--bg)] cekung text-zinc-300 px-1.5 py-0.5 text-[9px] uppercase">
-                                  {project.category}
+                                  {CATEGORY_LABELS[project.category] ?? project.category}
                                 </span>
                                 {project.featured && (
                                   <span className="rounded-lg bg-[var(--bg)] cekung text-[var(--aksen)] px-1.5 py-0.5 text-[9px]">
@@ -546,10 +556,13 @@ Jelaskan hasil yang telah dicapai dari proyek ini.`);
                         onChange={(e) => setFormCategory(e.target.value as any)}
                         className="w-full rounded-xl bg-[var(--bg)] cekung px-3.5 py-2 text-sm text-white outline outline-1 outline-transparent focus:outline-[var(--aksen)] transition-all duration-300"
                       >
-                        <option value="web">Web Application</option>
-                        <option value="mobile">Mobile Application</option>
-                        <option value="branding">Creative Branding</option>
-                        <option value="experimental">Experimental</option>
+                        
+<option value="web">Web Application</option>
+<option value="mobile">Mobile Application</option>
+<option value="branding">Creative Branding</option>
+<option value="experimental">Experimental</option>
+<option value="game">Game Development</option>
+
                       </select>
                     </div>
 

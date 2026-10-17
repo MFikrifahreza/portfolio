@@ -6,7 +6,7 @@ export interface Project {
   content: string; // Rich markdown or detailed paragraph text
   coverUrl: string;
   tags: string[];
-  category: 'web' | 'mobile' | 'branding' | 'experimental';
+  category: "web" | "mobile" | "branding" | "experimental" | "game";
   timeline: string;
   role: string;
   client?: string;

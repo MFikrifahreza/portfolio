@@ -300,13 +300,16 @@ export default function App() {
 
   };
 
-  const categoryOptions = [
-    { value: "all", label: "Semua" },
-    { value: "web", label: "Web App" },
-    { value: "mobile", label: "Mobile App" },
-    { value: "branding", label: "Branding" },
-    { value: "experimental", label: "Eksperimental" },
-  ];
+
+const categoryOptions = [
+  { value: "all", label: "Semua" },
+  { value: "web", label: "Web App" },
+  { value: "mobile", label: "Mobile App" },
+  { value: "branding", label: "Branding" },
+  { value: "experimental", label: "Eksperimental" },
+  { value: "game", label: "Game Development" },
+];
+
 
   const activeCategoryLabel =
     categoryOptions.find((category) => category.value === categoryFilter)?.label ??
