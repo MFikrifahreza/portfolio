@@ -1190,7 +1190,7 @@ export default function App() {
 
                     <span className="text-zinc-400">
 
-                      fikrifahreza597@gmail.com
+                      fikrieza69@gmail.com
 
                     </span>
 
